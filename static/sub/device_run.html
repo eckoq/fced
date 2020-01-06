@@ -1,0 +1,130 @@
+<div>
+<h3>设备部署</h3>
+<hr>
+<p style="font-size:14px">
+本文档说明平台镜像如何在厂商提供的设备中运行，供厂商参考。
+</p>
+
+<h4>安装Docker18.09版本</h4>
+<hr>
+<p style="font-size:14px">
+安装步骤参考 https://docs.docker.com/install 
+</p>
+<img src="/static/img/dev_run_install_docker.png"></img>
+
+
+<h4>平台镜像下载</h4>
+<hr>
+<p style="font-size:14px">
+厂商根据设备的CPU结构、操作系统类型，进入下载页面获取相应的镜像包。
+</p>
+<img src="/static/img/dev_run_download.png"></img>
+
+<h4>镜像启动</h4>
+<hr>
+<p>
+<h4 style="font-size:16px">step 1 docker加载已经压缩的镜像包</h4>
+</p>
+
+<pre class="prettyprint prettyprinted">
+  docker load &lt lego_server-x86_64-centos-6000100.tgz
+    或者
+  docker image load &lt lego_server-x86_64-centos-6000100.tgz
+</pre>
+
+<p>
+<h4 style="font-size:16px">step 2 启动运行docker镜像</h4>
+</p>
+
+<pre class="prettyprint prettyprinted">
+docker run -d -it -v /storage1:/storage1 -v /storage2:/storage2 \
+                  --network host \
+                  --privileged \
+                  -e MAC=52:54:00:3c:44:f8 -e NIC=eth1 -e PROVIDERID=10 \
+                  --name v6000100 \
+                  36b160acf449
+</pre>
+
+<p>
+<h4 style="font-size:14px">[-v] Mount volume</h4>
+</p>
+<hr>
+<p style="font-size:14px">
+挂载分区，将主机目录mount到docker。</br>
+<ul>
+    <li style="font-size:14px;font-weight:bold;">主机多磁盘的场景下，一定保证每个磁盘的挂载目录为/storage1 /storage2 ... /storage{disk_num} 依次递增，启动docker时候，请使用多个 -v 参数。</li>
+    <li style="font-size:14px;font-weight:bold;">主机同一分区仅且只能一个目录mount到docker</li>
+</ul>
+<p style="font-size:14px">
+说明：例如/data为/dev/vdb1, /data/storage1和/data/storage2为同一分区，不可以同时使用-v参数
+</p>
+<pre class="prettyprint prettyprinted">
+/dev/vdb1       394G  172M  374G   1% /data
+
+[root@VM_120_21_centos ~]# ls -ls /data/ |grep storage
+ 4 drwxr-xr-x 2 root root  4096 Dec 25 16:33 storage1
+ 4 drwxr-xr-x 2 root root  4096 Dec 25 16:33 storage2
+</pre>
+</p>
+
+<p>
+<h4 style="font-size:14px">[--network] Connect a container to a network</h4>
+</p>
+<hr>
+<p style="font-size:14px">
+一般情况使用host模式， 对于某些多线汇聚设备使用bridge模式
+</p>
+
+<p>
+<h4 style="font-size:14px">[--privileged] Full container capabilities</h4>
+</p>
+<hr>
+<p style="font-size:14px">
+容器拥有linux内核全部能力，比如容器内mount操作只有指定参数才有效
+</p>
+
+<p>
+<h4 style="font-size:14px">[--name] Container name</h4>
+</p>
+<hr>
+<p style="font-size:14px">
+容器名称
+</p>
+
+<p>
+<h4 style="font-size:14px">[-e] Set environment variables</h4>
+</p>
+<hr>
+<p style="font-size:14px">
+    <table class="table table-bordered table-hover" border=1 cellspacing="0">
+      <thead>
+        <tr class="center">
+          <th width="150px" style="font-size:14px">环境变量</th>
+          <th width="150px" style="font-size:14px">类型</th>
+          <th width="150px" style="font-size:14px">必选</th>
+          <th width="550px" style="font-size:14px">描述</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="center" style="font-size:14px">MAC</td>
+          <td class="center" style="font-size:14px">string</td>
+          <td class="center" style="font-size:14px">是</td>
+          <td class="center" style="font-size:14px">实例使用的网卡mac地址，保证唯一性</td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">NIC</td>
+          <td class="center" style="font-size:14px">string</td>
+          <td class="center" style="font-size:14px">是</td>
+          <td class="center" style="font-size:14px">实例使用的网卡名</td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">PROVIDERID</td>
+          <td class="center" style="font-size:14px">int32_t</td>
+          <td class="center" style="font-size:14px">否</td>
+          <td class="center" style="font-size:14px">验收分配给厂商的ID，作为厂商唯一性标识</td>
+        </tr>
+      </tbody>
+    </table>
+</p>
+</div>

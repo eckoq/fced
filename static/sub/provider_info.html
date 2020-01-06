@@ -1,0 +1,138 @@
+<div>
+<h3>接入信息</h3>
+<hr>
+<p style="font-size:14px">
+厂商提供基本信息供参考，用来判断资源是否符合要求的初步评估，请厂商们仔细。资源信息具体分为如下几类：
+</p>
+<ul>
+    <li style="font-size:14px">资源概况信息，包括厂商现有存量资源的设备数、总上行带宽、运营商分布等</li>
+    <li style="font-size:14px">资源硬件信息，包括资源CPU、内存、存储和网络等信息</li>
+    <li style="font-size:14px">资源软件信息，包括支持操作系统、c++支持版本、支持docker等</li>
+</ul>
+<p style="font-size:14px">
+接入填写信息表格下载: 《<a href="/static/厂商接入信息表格.xlsx">厂商接入信息表格</a>》
+</p>
+
+<h4>资源概况</h4>
+<hr>
+<p style="font-size:14px">
+    <table class="table table-bordered table-hover" border=1 cellspacing="0">
+      <thead>
+        <tr class="center">
+          <th width="150px" style="font-size:14px">指标名称</th>
+          <th width="250px" style="font-size:14px">参考示例</th>
+          <th width="285px" style="font-size:14px">描述</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="center" style="font-size:14px">单机上行能力(Mbps)</td>
+          <td class="center" style="font-size:14px">[5, -]</td>
+          <td style="font-size:14px">设备在高峰期19:00-23:00的上行带宽能力</td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">设备数(台)</td>
+          <td class="center" style="font-size:14px">[10, -]</td>
+          <td style="font-size:14px">厂商可提供设备数量</td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">总上行能力(Mbps)</td>
+          <td class="center" style="font-size:14px">[5000, -]</td>
+          <td style="font-size:14px">厂商可提供设备的总上行支撑，至少要大于5Gbps</td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">资源分布</td>
+          <td class="center" style="font-size:14px">--</td>
+          <td style="font-size:14px">厂商资源运营商城市的分布情况</td>
+        </tr>
+      </tbody>
+    </table>
+</p>
+
+<h4>硬件信息</h4>
+<hr>
+<p style="font-size:14px">
+    <table class="table table-bordered table-hover" border=1 cellspacing="0">
+      <thead>
+        <tr class="center">
+          <th width="150px" style="font-size:14px">指标名称</th>
+          <th width="250px" style="font-size:14px">参考示例</th>
+          <th width="285px" style="font-size:14px">描述</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="center" style="font-size:14px">CPU架构</td>
+          <td class="center" style="font-size:14px">arm32/arm64/x86/x86_64</td>
+          <td style="font-size:14px">主要CPU支持架构，盒子设备可支持mips</td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">CPU线程数</td>
+          <td class="center" style="font-size:14px">16</td>
+          <td style="font-size:14px">CPU线程数为/proc/cpuinfo中的processor数量</td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">内存大小</td>
+          <td class="center" style="font-size:14px">512MB</td>
+          <td style="font-size:14px">设备的物理内存</td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">磁盘信息</td>
+          <td class="center" style="font-size:14px">2*800G*ssd|1*1T*sata</td>
+          <td style="font-size:14px">磁盘个数、单磁盘空间、磁盘类型</td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">磁盘128K随机读</td>
+          <td class="center" style="font-size:14px">读带宽:1Gps,IOPS:1000:,平均延时:1ms</td>
+          <td style="font-size:14px">磁盘随机读性能,测试关掉pagecache使用directIO</td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">磁盘128K随机读写</td>
+          <td class="center" style="font-size:14px">读带宽:800Mbps,IOPS:780,平均延时:1.28ms</td>
+          <td style="font-size:14px">磁盘随机读写性能,测试关掉pagecache使用directIO</td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">网络类型</td>
+          <td class="center" style="font-size:14px">直连/NAT</td>
+          <td style="font-size:14px">直连设备有公网IP,直连设备优先</td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">网络拓扑</td>
+          <td class="center" style="font-size:14px">IDC/MEC/家庭宽带</td>
+          <td style="font-size:14px">提供设备所在网络环境的拓扑结构</td>
+        </tr>
+      </tbody>
+    </table>
+</p>
+
+<h4>软件信息</h4>
+<hr>
+<p style="font-size:14px">
+    <table class="table table-bordered table-hover" border=1 cellspacing="0">
+      <thead>
+        <tr class="center">
+          <th width="150px" style="font-size:14px">指标名称</th>
+          <th width="250px" style="font-size:14px">参考示例</th>
+          <th width="285px" style="font-size:14px">描述</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="center" style="font-size:14px">操作系统</td>
+          <td class="center" style="font-size:14px">centos/ubuntu</td>
+          <td style="font-size:14px">厂商设备运行的操作系统</td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">支持docker</td>
+          <td class="center" style="font-size:14px">YES/NO</td>
+          <td style="font-size:14px">支持docker版本大于18.09</td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">valgrind/perf/tcpdump</td>
+          <td class="center" style="font-size:14px">YES/NO</td>
+          <td style="font-size:14px">常用定位工具支持</td>
+        </tr>
+      </tbody>
+    </table>
+</p>
+</div>

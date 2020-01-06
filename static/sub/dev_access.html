@@ -1,0 +1,247 @@
+<div>
+<h3>接入说明</h3>
+<hr>
+<p style="font-size:14px">
+本文档旨在帮助厂商在资源接入过程中，了解平台支持信息、支持的DOCKER镜像和接入流程，便于厂商们接入。
+</p>
+
+<h4>CPU架构和系统</h4>
+<hr>
+<p style="font-size:14px">
+可支持CPU架构: Arm32/Arm64/x86/x86_64</br>
+可支持操作系统：centos/ubuntu</br>
+备注：
+其他CPU架构和操作系统暂不支持，有需要可以联系相关接入人员
+</p>
+
+<h4>镜像支持</h4>
+<hr>
+<p style="font-size:14px">
+平台通过docker镜像的方式提供程序包，需要厂商设备可以支持docker</br>
+docker版本>=18.09</br>
+平台支持程序包镜像：
+    <table class="table table-bordered table-hover" border=1 cellspacing="0">
+      <thead>
+        <tr class="center">
+          <th width="150px" style="font-size:14px">操作系统</th>
+          <th width="150px" style="font-size:14px">Arm32</th>
+          <th width="150px" style="font-size:14px">Arm64</th>
+          <th width="150px" style="font-size:14px">x86</th>
+          <th width="150px" style="font-size:14px">x86_64</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="center" style="font-size:14px">centos7</td>
+          <td class="center" style="font-size:14px">N</td>
+          <td class="center" style="font-size:14px">N</td>
+          <td class="center" style="font-size:14px">Y</td>
+          <td class="center" style="font-size:14px">Y</td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">ubuntu18.10</td>
+          <td class="center" style="font-size:14px">Y</td>
+          <td class="center" style="font-size:14px">Y</td>
+          <td class="center" style="font-size:14px">N</td>
+          <td class="center" style="font-size:14px">N</td>
+        </tr>
+      </tbody>
+    </table>
+</p>
+
+<h4>推荐配置</h4>
+<hr>
+<h4 style="font-size:15px">50Mbps以下主机配置</h4>
+    <table class="table table-bordered table-hover" border=1 cellspacing="0">
+      <thead>
+        <tr class="center">
+          <th width="200px" style="font-size:14px">硬件</th>
+          <th width="200px" style="font-size:14px">要求</th>
+          <th width="200px" style="font-size:14px">是否必须</th>
+          <th width="200px" style="font-size:14px">备注</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="center" style="font-size:14px">CPU</td>
+          <td class="center" style="font-size:14px">Arm 2核或者x86 1核</td>
+          <td class="center" style="font-size:14px">是</td>
+          <td class="center" style="font-size:14px">最低要求</td>
+        </tr>
+          <td class="center" style="font-size:14px">内存</td>
+          <td class="center" style="font-size:14px">128MB</td>
+          <td class="center" style="font-size:14px">是</td>
+          <td class="center" style="font-size:14px">最低要求</td>
+        <tr>
+        </tr>
+          <td class="center" style="font-size:14px">磁盘</td>
+          <td class="center" style="font-size:14px">75GB</td>
+          <td class="center" style="font-size:14px">是</td>
+          <td class="center" style="font-size:14px">最低要求，优先ssd</td>
+        <tr>
+        </tr>
+          <td class="center" style="font-size:14px">网卡</td>
+          <td class="center" style="font-size:14px">50Mbps</td>
+          <td class="center" style="font-size:14px">是</td>
+          <td class="center" style="font-size:14px">最低要求</td>
+        <tr>
+      </tbody>
+    </table>
+<h4 style="font-size:15px">50Mbps-200Mbps主机配置</h4>
+    <table class="table table-bordered table-hover" border=1 cellspacing="0">
+      <thead>
+        <tr class="center">
+          <th width="200px" style="font-size:14px">硬件</th>
+          <th width="200px" style="font-size:14px">要求</th>
+          <th width="200px" style="font-size:14px">是否必须</th>
+          <th width="200px" style="font-size:14px">备注</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="center" style="font-size:14px">CPU</td>
+          <td class="center" style="font-size:14px">Arm 4核或者x86 2核</td>
+          <td class="center" style="font-size:14px">是</td>
+          <td class="center" style="font-size:14px">最低要求</td>
+        </tr>
+          <td class="center" style="font-size:14px">内存</td>
+          <td class="center" style="font-size:14px">512MB</td>
+          <td class="center" style="font-size:14px">是</td>
+          <td class="center" style="font-size:14px">最低要求</td>
+        <tr>
+        </tr>
+          <td class="center" style="font-size:14px">磁盘</td>
+          <td class="center" style="font-size:14px">300GB</td>
+          <td class="center" style="font-size:14px">是</td>
+          <td class="center" style="font-size:14px"></td>
+        <tr>
+        </tr>
+          <td class="center" style="font-size:14px">网卡</td>
+          <td class="center" style="font-size:14px">200Mbps</td>
+          <td class="center" style="font-size:14px">是</td>
+          <td class="center" style="font-size:14px"></td>
+        <tr>
+      </tbody>
+    </table>
+<h4 style="font-size:15px">200Mbps-500Mbps主机配置</h4>
+    <table class="table table-bordered table-hover" border=1 cellspacing="0">
+      <thead>
+        <tr class="center">
+          <th width="200px" style="font-size:14px">硬件</th>
+          <th width="200px" style="font-size:14px">要求</th>
+          <th width="200px" style="font-size:14px">是否必须</th>
+          <th width="200px" style="font-size:14px">备注</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="center" style="font-size:14px">CPU</td>
+          <td class="center" style="font-size:14px">x86 4核</td>
+          <td class="center" style="font-size:14px">是</td>
+          <td class="center" style="font-size:14px">主频>2GHZ，最低要求</td>
+        </tr>
+          <td class="center" style="font-size:14px">内存</td>
+          <td class="center" style="font-size:14px">1GB</td>
+          <td class="center" style="font-size:14px">是</td>
+          <td class="center" style="font-size:14px">最低要求</td>
+        <tr>
+        </tr>
+          <td class="center" style="font-size:14px">磁盘</td>
+          <td class="center" style="font-size:14px">500GB</td>
+          <td class="center" style="font-size:14px">是</td>
+          <td class="center" style="font-size:14px"></td>
+        <tr>
+        </tr>
+          <td class="center" style="font-size:14px">网卡</td>
+          <td class="center" style="font-size:14px">500Mbps</td>
+          <td class="center" style="font-size:14px">是</td>
+          <td class="center" style="font-size:14px"></td>
+        <tr>
+      </tbody>
+    </table>
+<h4 style="font-size:15px">500Mbps-1Gbps主机配置</h4>
+    <table class="table table-bordered table-hover" border=1 cellspacing="0">
+      <thead>
+        <tr class="center">
+          <th width="200px" style="font-size:14px">硬件</th>
+          <th width="200px" style="font-size:14px">要求</th>
+          <th width="200px" style="font-size:14px">是否必须</th>
+          <th width="200px" style="font-size:14px">备注</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="center" style="font-size:14px">CPU</td>
+          <td class="center" style="font-size:14px">x86 8核</td>
+          <td class="center" style="font-size:14px">是</td>
+          <td class="center" style="font-size:14px">主频>2GHZ，最低要求</td>
+        </tr>
+          <td class="center" style="font-size:14px">内存</td>
+          <td class="center" style="font-size:14px">2GB</td>
+          <td class="center" style="font-size:14px">是</td>
+          <td class="center" style="font-size:14px">最低要求</td>
+        <tr>
+        </tr>
+          <td class="center" style="font-size:14px">磁盘</td>
+          <td class="center" style="font-size:14px">1TB</td>
+          <td class="center" style="font-size:14px">是</td>
+          <td class="center" style="font-size:14px"></td>
+        <tr>
+        </tr>
+          <td class="center" style="font-size:14px">网卡</td>
+          <td class="center" style="font-size:14px">1Gbps</td>
+          <td class="center" style="font-size:14px">是</td>
+          <td class="center" style="font-size:14px"></td>
+        <tr>
+      </tbody>
+    </table>
+<h4 style="font-size:15px">10Gbps主机配置</h4>
+    <table class="table table-bordered table-hover" border=1 cellspacing="0">
+      <thead>
+        <tr class="center">
+          <th width="200px" style="font-size:14px">硬件</th>
+          <th width="200px" style="font-size:14px">要求</th>
+          <th width="200px" style="font-size:14px">是否必须</th>
+          <th width="200px" style="font-size:14px">备注</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="center" style="font-size:14px">CPU</td>
+          <td class="center" style="font-size:14px">x86 16核</td>
+          <td class="center" style="font-size:14px">是</td>
+          <td class="center" style="font-size:14px">主频>2GHZ，最低要求</td>
+        </tr>
+          <td class="center" style="font-size:14px">内存</td>
+          <td class="center" style="font-size:14px">32GB</td>
+          <td class="center" style="font-size:14px">是</td>
+          <td class="center" style="font-size:14px"></td>
+        <tr>
+        </tr>
+          <td class="center" style="font-size:14px">磁盘</td>
+          <td class="center" style="font-size:14px">15TB</td>
+          <td class="center" style="font-size:14px">是</td>
+          <td class="center" style="font-size:14px"></td>
+        <tr>
+        </tr>
+          <td class="center" style="font-size:14px">网卡</td>
+          <td class="center" style="font-size:14px">10Gbps</td>
+          <td class="center" style="font-size:14px">是</td>
+          <td class="center" style="font-size:14px"></td>
+        <tr>
+      </tbody>
+    </table>
+
+
+<h4>厂商接入流程</h4>
+<hr>
+<p>
+<h4 style="font-size:14px">step 1 厂商整理设备基本信息和和配置的情况说明，进入接入信息，下载厂商接入信息表，参考介绍填写表格</h4>
+<img src="/static/img/dev_access_step1.png"></img>
+<h4 style="font-size:14px">step 2 根据厂商提供的《接入信息》表，双方接口人沟通是否符合要求</h4>
+<h4 style="font-size:14px">step 3 设备测试验证，厂商提供测试设备，部署平台提供的程序镜像</h4>
+<h4 style="font-size:14px">step 4 设备验收，双方沟通带宽需求后厂商提供批量。进入设备验收，下载设备验收信息表，参考介绍填写表格</h4>
+<img src="/static/img/dev_access_step4.png"></img>
+<h4 style="font-size:14px">step 5 设备部署，平台安排设备部署上线和放量计划</h4>
+</p>
+</div>

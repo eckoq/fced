@@ -1,0 +1,74 @@
+<div>
+<h3>设备验收</h3>
+<hr>
+<p style="font-size:14px">
+厂商批量提供设备供部署使用时，平台需要进行设备管理，所以需要提供每台设备的详细信息，供平台入库管理。</br>
+设备验收表格下载: 《<a href="/static/设备验收信息表格.xlsx">设备验收信息表格</a>》
+</p>
+
+<p style="font-size:14px">
+    <table class="table table-bordered table-hover" border=1 cellspacing="0">
+      <thead>
+        <tr class="center">
+          <th width="150px" style="font-size:14px">指标名称</th>
+          <th width="500px" style="font-size:14px">备注</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="center" style="font-size:14px">MAC地址</td>
+          <td style="font-size:14px">设备mac，不同设备或者不同docker实例要保证唯一性</td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">省份</td>
+          <td style="font-size:14px"></td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">运营商</td>
+          <td style="font-size:14px">移动、联通、电信和其他</td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">下行带宽(Mbps)</td>
+          <td style="font-size:14px"></td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">上行带宽(Mbps)</td>
+          <td style="font-size:14px"></td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">网络类型</td>
+          <td style="font-size:14px">静态IP、全锥型、端口限制、IP限制、对称型</td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">CPU架构</td>
+          <td style="font-size:14px">arm32/arm64/x86/x86_64</td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">CPU核数</td>
+          <td style="font-size:14px">设备CPU的cores数量，如E3-1230V2@3.30GHz为4 cores 8Threads的cores为4</td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">内存大小MB</td>
+          <td style="font-size:14px"></td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">磁盘类型</td>
+          <td style="font-size:14px">ssd/hdd, 多盘时需要填写不同类型的所有磁盘信息</td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">磁盘数量</td>
+          <td style="font-size:14px">多盘时需要填写不同类型的所有磁盘信息</td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">磁盘空间(GB)</td>
+          <td style="font-size:14px">多盘时需要填写不同类型的所有磁盘信息</td>
+        </tr>
+      </tbody>
+    </table>
+</p>
+<p style="font-size:14px">
+备注：</br>
+设备磁盘有特殊情况下如多盘，请填写设备下不同磁盘的相关信息
+</p>
+
+</div>

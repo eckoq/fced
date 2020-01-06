@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+<meta http-equiv="Pragma" content="no-cache"> 
+<meta http-equiv="Cache-Control" content="no-cache"> 
+<meta http-equiv="Expires" content="0"> 
+<title>FCED登录</title> 
+<link rel="stylesheet" href="{% static "css/login.css" %}">
+</head> 
+<body> 
+
+<div class="login">
+    <div class="message">FCED-厂商登录</div>
+    <div id="darkbannerwrap"></div>
+    
+    <form method="post" action="/overview/do_login">
+        {% csrf_token %}
+        {% if message %}
+            <div style="color:red"">{{ message }}</div>
+		    <hr class="hr20">
+        {% endif %}
+		<input name="action" value="login" type="hidden">
+		<input name="username" placeholder="用户名" required="" type="text">
+		<hr class="hr15">
+		<input name="password" placeholder="密码" required="" type="password">
+		<hr class="hr15">
+		<input value="登录" style="width:100%;" type="submit">
+		<hr class="hr20">
+	</form>
+
+	
+</div>
+
+<div class="copyright">&copy; Copyright (c) 2019 Fced, Inc. All Rights Reserved. </div>
+
+</body>
+</html>
