@@ -3,7 +3,8 @@
 <hr>
 <p style="font-size:14px">
 厂商批量提供设备供部署使用时，平台需要进行设备管理，所以需要提供每台设备的详细信息，供平台入库管理。</br>
-设备验收表格下载: 《<a href="/static/设备验收信息表格.xlsx">设备验收信息表格</a>》
+验收文件模版下载: 《<a href="/static/设备验收信息表格.xlsx">设备验收信息表格</a>》 </br>
+验收文件命名规则：<span style="color:red">厂商名称_yymmdd</span></br>
 </p>
 
 <p style="font-size:14px">
@@ -17,11 +18,27 @@
       <tbody>
         <tr>
           <td class="center" style="font-size:14px">MAC地址</td>
-          <td style="font-size:14px">设备mac，不同设备或者不同docker实例要保证唯一性</td>
+          <td style="font-size:14px">运行程序的实例mac，不同设备或者不同docker实例要保证唯一性</td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">母机MAC地址</td>
+          <td style="font-size:14px">非必填，运行docker实例的母机MAC地址</td>
+        </tr>
+        <tr>
+            <td class="center" style="font-size:14px">外网IP</td>
+            <td style="font-size:14px">非必填，设备外网IP，静态设备可以填写</td>
+        </tr>
+        <tr>
+            <td class="center" style="font-size:14px">设备类型</td>
+          <td style="font-size:14px">盒子填写1；直连矿机填写2；P2P矿机填写3</td>
         </tr>
         <tr>
           <td class="center" style="font-size:14px">省份</td>
           <td style="font-size:14px"></td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">城市</td>
+          <td style="font-size:14px">非必填</td>
         </tr>
         <tr>
           <td class="center" style="font-size:14px">运营商</td>
@@ -60,7 +77,7 @@
           <td style="font-size:14px">多盘时需要填写不同类型的所有磁盘信息</td>
         </tr>
         <tr>
-          <td class="center" style="font-size:14px">磁盘空间(GB)</td>
+          <td class="center" style="font-size:14px">磁盘空间(MB)</td>
           <td style="font-size:14px">多盘时需要填写不同类型的所有磁盘信息</td>
         </tr>
       </tbody>

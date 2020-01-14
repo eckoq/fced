@@ -37,10 +37,13 @@
 </p>
 
 <pre class="prettyprint prettyprinted">
-docker run -d -it -v /storage1:/storage1 -v /storage2:/storage2 \
+docker run -d -it -v /data/storage1:/storage1 -v /data/storage2:/storage2 \
                   --network host \
                   --privileged \
-                  -e MAC=52:54:00:3c:44:f8 -e NIC=eth1 -e PROVIDERID=10 \
+                  -e MAC=52:54:00:3c:44:f8\
+                  -e NIC=eth1 \
+                  -e PROVIDERID=10 \
+                  -e DISKPARAMS=/storage1:ssd;/storage2:hdd; \
                   --name v6000100 \
                   36b160acf449
 </pre>
@@ -51,20 +54,31 @@ docker run -d -it -v /storage1:/storage1 -v /storage2:/storage2 \
 <hr>
 <p style="font-size:14px">
 挂载分区，将主机目录mount到docker。</br>
-<ul>
-    <li style="font-size:14px;font-weight:bold;">主机多磁盘的场景下，一定保证每个磁盘的挂载目录为/storage1 /storage2 ... /storage{disk_num} 依次递增，启动docker时候，请使用多个 -v 参数。</li>
-    <li style="font-size:14px;font-weight:bold;">主机同一分区仅且只能一个目录mount到docker</li>
-</ul>
-<p style="font-size:14px">
-说明：例如/data为/dev/vdb1, /data/storage1和/data/storage2为同一分区，不可以同时使用-v参数
-</p>
-<pre class="prettyprint prettyprinted">
-/dev/vdb1       394G  172M  374G   1% /data
+    <ul>
+        <li style="font-size:14px;font-weight:bold;">主机磁盘映射到docker分区中的名称格式：<span style="color:red">storage${count}；其中count从1开始递增</span>。例如storage1，storage2，storage3 ... storage{n}。启动docker时候，请使用多个 -v 参数。</li>
+        <li style="font-size:14px;font-weight:bold;">主机磁盘信息传递docker分区，通过docker环境变量<span style="color:red">DISKPARAMS</span>设置docker分区属性，例如 -e DISKPARAMS=/storage1:ssd;/storage2:hdd;</li>
+        <li style="font-size:14px;font-weight:bold;">主机同一分区仅且只能一个目录mount到docker</li>
+    </ul>
+    <p style="font-size:14px">
+    说明
+    </p>
+    <p style="font-size:14px">
+    1. docker分区属性
+        <ul
+            <li style="font-size:14px;font-weight:bold;">属性1：磁盘类型, 设置值为ssd或者hdd</li>
+        </ul>
+    </p>
 
-[root@VM_120_21_centos ~]# ls -ls /data/ |grep storage
- 4 drwxr-xr-x 2 root root  4096 Dec 25 16:33 storage1
- 4 drwxr-xr-x 2 root root  4096 Dec 25 16:33 storage2
-</pre>
+    <p style="font-size:14px">
+    2. data为/dev/vdb1的分区目录, /data/storage1和/data/storage2为主机的同一分区，不可以同时使用-v参数
+    </p>
+    <pre class="prettyprint prettyprinted">
+    /dev/vdb1       394G  172M  374G   1% /data
+    
+    [root@VM_120_21_centos ~]# ls -ls /data/ |grep storage
+     4 drwxr-xr-x 2 root root  4096 Dec 25 16:33 storage1
+     4 drwxr-xr-x 2 root root  4096 Dec 25 16:33 storage2
+    </pre>
 </p>
 
 <p>
@@ -123,6 +137,12 @@ docker run -d -it -v /storage1:/storage1 -v /storage2:/storage2 \
           <td class="center" style="font-size:14px">int32_t</td>
           <td class="center" style="font-size:14px">否</td>
           <td class="center" style="font-size:14px">验收分配给厂商的ID，作为厂商唯一性标识</td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">DISKPARAMS</td>
+          <td class="center" style="font-size:14px">string</td>
+          <td class="center" style="font-size:14px">是</td>
+          <td class="center" style="font-size:14px">描述docker磁盘的信息，磁盘属性通过"<span style="color:red"> , </span>"分隔，多磁盘通过"<span style="color:red"> ; </span>"分隔，例如/storage1:ssd;/storage2:hdd</td>
         </tr>
       </tbody>
     </table>
