@@ -9,20 +9,9 @@ from django.contrib.auth import authenticate, login, logout
 from .models import User
 
 # Create your views here.
+
 def main(request):
     return render(request, 'main.html')
-
-@login_required
-def index(request):
-    return render(request, 'index.html')
-
-@login_required
-def download(request):
-    return render(request, 'download.html')
-
-@login_required
-def contact(request):
-    return render(request, 'contact.html')
 
 def do_login(request):
     if request.method == "POST":
@@ -35,7 +24,7 @@ def do_login(request):
         if auth_user is not None:
             try:
                 login(request, auth_user)
-                return redirect('/overview/index/')
+                return redirect('/overview/main_page/')
             except:
                 message = "登录失败！"
         else:
@@ -48,3 +37,27 @@ def do_login(request):
 def do_login_out(request):
     logout(request)
     return render(request, 'main.html')
+
+#main page
+@login_required
+def main_page(request):
+    return render(request, 'main_page.html')
+
+#
+# P2P device
+#
+@login_required
+def index(request):
+    return render(request, 'index.html')
+
+@login_required
+def download(request):
+    return render(request, 'download.html')
+
+@login_required
+def contact(request):
+    return render(request, 'contact.html')
+
+#
+# HTTP device
+#

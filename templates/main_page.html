@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>fced</title>
+
+<link rel="stylesheet" href="{% static "css/ace.min.css" %}">
+<link rel="stylesheet" href="{% static "css/bootstrap-iso.css" %}">
+<link rel="stylesheet" href="{% static "css/style.css" %}">
+<link rel="stylesheet" href="{% static "css/prettify.css" %}">
+</head>
+<body>
+<nav>
+  <div class="container">
+    <h1>FCED</h1>
+    <div id="menu">
+      <ul class="toplinks">
+      </ul>
+    </div>
+    <a id="menu-toggle" href="#" class=" ">&#9776;</a> </div>
+</nav>
+<header>
+  <div class="container">
+    <h2 class="docs-header"> FCED - Overview </h2>
+  </div>
+</header>
+<section>
+  <div class="container">
+    <h4>直连矿机</h4>
+    <hr>
+    <p style="font-size:14px">
+       利用边缘类IDC资源，部署平台直连矿机应用程序提供内容分发服务。通过标准HTTP协议进行数据传输，带宽实时上报进行精准流量调度。直连矿机资源基本要求如下：
+        <ul>
+            <li style="font-size:14px">设备网络为公网IP。</li>
+            <li style="font-size:14px">linux内核版本大于等于3.8。</li>
+            <li style="font-size:14px">设备CPU架构为x86_64。</li>
+            <li style="font-size:14px">设备上行带宽大于等于100Mbps。</li>
+        </ul>
+        <p style="font-size:14px">
+            请参考<a href="">直连矿机接入指引</a>进行资源引入。
+        </p>
+    </p>
+
+    <h4>P2P矿机</h4>
+    <hr>
+    <p style="font-size:14px">
+       利用边缘网络的闲置资源，如家庭盒子、IDC机房设备、城域网等，部署平台的P2P应用程序提供内容分发服务。利用UDP协议进行数据传输，通过NAT检测、NAT打洞技术，有效连通NAT后设备间进行通信。P2P矿机资源有两个基本要求：
+        <ul>
+            <li style="font-size:14px">设备网络为稳定的全锥型或者公网IP。</li>
+            <li style="font-size:14px">设备上行带宽大于等于50Mbps。</li>
+        </ul>
+        <p style="font-size:14px">
+            请参考<a href="/overview/index">P2P矿机接入指引</a>进行资源引入。
+        </p>
+    </p>
+  </div>
+</section>
+
+<footer>
+      <p> &copy; Copyright (c) 2019 FCED, Inc. All Rights Reserved.  </p>
+</footer>
+<script src="{% static "js/jquery.min.js" %}" type="text/javascript"></script> 
+<script src="{% static "js/prettify/prettify.js" %}" type="text/javascript"></script> 
+<script src="{% static "js/layout.js" %}" type="text/javascript"></script>
+<script src="{% static "js/jquery.localscroll-1.2.7.js" %}" type="text/javascript"></script>
+<script src="{% static "js/jquery.scrollTo-1.4.3.1.js" %}" type="text/javascript"></script>
+<script src="{% static "js/bootstrap.min.js" %}" type="text/javascript"></script>
+<script src="{% static "js/ace.min.js" %}" type="text/javascript"></script>
+</body>
+</html>
