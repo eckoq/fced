@@ -17,47 +17,44 @@
 <body>
 <nav>
   <div class="container">
-    <h1>FCED</h1>
+    <h1>直连矿机</h1>
     <div id="menu">
       <ul class="toplinks">
+        <li><a href="/overview/http_dev_index">首页</a></li>
+        <li><a href="/overview/http_dev_download">下载</a></li>
+        <li><a href="/overview/http_dev_contact">联系</a></li>
       </ul>
     </div>
     <a id="menu-toggle" href="#" class=" ">&#9776;</a> </div>
 </nav>
 <header>
   <div class="container">
-    <h2 class="docs-header"> FCED - Overview </h2>
+    <h2 class="docs-header"> FCE - Download Documentation</h2>
   </div>
 </header>
 <section>
   <div class="container">
-<!--
-    <h4>直连矿机</h4>
+    <h4>版本v1.0.5</h4>
     <hr>
     <p style="font-size:14px">
-       利用边缘类IDC资源，部署平台直连矿机应用程序提供内容分发服务。通过标准HTTP协议进行数据传输，带宽实时上报进行精准流量调度。直连矿机资源基本要求如下：
+    特性：
         <ul>
-            <li style="font-size:14px">设备网络为公网IP。</li>
-            <li style="font-size:14px">linux内核版本大于等于3.8。</li>
-            <li style="font-size:14px">设备CPU架构为x86_64。</li>
-            <li style="font-size:14px">设备上行带宽大于等于100Mbps。</li>
+            <li style="font-size:14px">适配磁盘高设备号场景</li>
+            <li style="font-size:14px">增加docker-stop信号处理</li>
+            <li style="font-size:14px">增加IO读写延时上报</li>
         </ul>
-        <p style="font-size:14px">
-            请参考<a href="/overview/http_dev_index">直连矿机接入指引</a>进行资源引入。
-        </p>
     </p>
--->
-    <h4>P2P矿机</h4>
-    <hr>
     <p style="font-size:14px">
-       利用边缘网络的闲置资源，如家庭盒子、IDC机房设备、城域网等，部署平台的P2P应用程序提供内容分发服务。利用UDP协议进行数据传输，通过NAT检测、NAT打洞技术，有效连通NAT后设备间进行通信。P2P矿机资源有两个基本要求：
-        <ul>
-            <li style="font-size:14px">设备网络为稳定的全锥型或者公网IP。</li>
-            <li style="font-size:14px">设备上行带宽大于等于50Mbps。</li>
-        </ul>
-        <p style="font-size:14px">
-            请参考<a href="/overview/index">P2P矿机接入指引</a>进行资源引入。
-        </p>
+        <table class="table table-bordered table-hover" border=1 cellspacing="0">
+          <tbody>
+            <tr>
+              <td width="200px" class="center" style="font-size:14px">x86_64-centos</td>
+              <td width="700px" class="center" style="font-size:14px">64-bit amd64, little-endian/centos 7</td>
+              <td width="100px" class="center" style="font-size:14px"><a href="http://183.61.57.108/legoserver.com/fog_lego_server_1.0.5.gz">Download</a></td>
+              <td width="100px" class="center" style="font-size:14px">md5:ae10ed45b680e12f90dbb09cf2734126</td>
+            </tr>
+          </tbody>
+        </table>
     </p>
   </div>
 </section>
@@ -72,5 +69,6 @@
 <script src="{% static "js/jquery.scrollTo-1.4.3.1.js" %}" type="text/javascript"></script>
 <script src="{% static "js/bootstrap.min.js" %}" type="text/javascript"></script>
 <script src="{% static "js/ace.min.js" %}" type="text/javascript"></script>
+<script src="{% static "js/user/http_dev_index.js" %}"  type="text/javascript"></script>
 </body>
 </html>

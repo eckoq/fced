@@ -61,3 +61,14 @@ def contact(request):
 #
 # HTTP device
 #
+@login_required
+def http_dev_index(request):
+    return render(request, 'http_dev_index.html')
+
+@login_required
+def http_dev_download(request):
+    return render(request, 'http_dev_download.html')
+
+@login_required
+def http_dev_contact(request):
+    return render(request, 'http_dev_contact.html')
