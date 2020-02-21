@@ -238,6 +238,20 @@ docker版本>=18.09</br>
         <tr>
       </tbody>
     </table>
+<h4 style="font-size:15px">磁盘配置</h4>
+    <p style="font-size:14px">
+        <span style="font-weight:bold">磁盘128K随机读能力：</span> <span style="color:red">SSD读带宽1.5Gbps，HDD读带宽100Mbps</span> (SSD和HDD的128KB随机读带宽为平台提供的建议值，厂商可用磁盘实测数据为准)</br>
+        <span style="font-weight:bold">磁盘总存储容量：</span><span style="color:red">设备1Gbps上行带宽需要磁盘总存储1.5TB</span>，部分设备可参考《推荐配置》</br>
+        <span style="font-weight:bold">磁盘要求：</span>
+        <ul>
+            <li style="font-size:14px">
+                <span style="color:red">磁盘128K随机读能力 >= 网卡上行能力</span>。 如网卡为3Gbps设备，则需要2块SSD才可以保证1.5Gbps*2 >= 3Gbps
+            </li>
+            <li style="font-size:14px">
+                <span style="color:red">磁盘总存储容量 >= 配置推荐值</span>。 如网卡为3Gbps设备，需要4.5TB存储。2块SSD保证磁盘读性能，如果SSD为1TB，可外挂1块HDD。
+            </li>
+        </ul>
+    </p>
 
 
 <h4>厂商接入流程</h4>
