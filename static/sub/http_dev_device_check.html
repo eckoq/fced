@@ -1,0 +1,189 @@
+<div>
+<h3>设备验收</h3>
+<hr>
+<p style="font-size:14px">
+设备信息需要厂商提供给平台统一管理，验收过程分为两步：
+    <ul>
+        <li style="font-size:14px">1) 通过验收任务接口，发起验收任务</li>
+        <li style="font-size:14px">2) 生成验收信息表格，邮件抄送给<a href="/overview/http_dev_contact">相关联系人</a></li>
+    </ul>
+</p>
+
+<h4>验收任务接口</h4>
+<hr>
+<p style="font-size:14px">
+    <h4 style="font-size:14px">1. 接口规范</h4>
+    <ul>
+        <li style="font-size:14px">验收流程是按次序执行，避免频繁调用接口和跳跃调用接口，如查询验收接口需在提交验收后第二天才能调用</li>
+        <li style="font-size:14px">只有在IP白名单的机器才调用接口，添加白名单请联系负责人</li>
+        <li style="font-size:14px">提交验收接口有调用频率限制以及调用时间限制</li>
+    </ul>
+    <p style="font-size:14px">正式环境：<a>http://interface.cdn.qq.com:17003/auto_device_check/</a></br>
+                              测试环境：<a>http://interface.cdn.qq.com:17003/auto_device_check_test/</a></p>
+
+    <h4 style="font-size:14px">2. 提交验收接口</h4>
+    <p style="font-size:14px">(1) 请求地址</p>
+    <pre class="prettyprint prettyprinted">POST http://**/auto_device_check/v1/check_tasks</pre>
+    <p style="font-size:14px">备注：Content-Type:application/json</p>
+    <p style="font-size:14px">(2) 请求参数</p>
+    <pre class="prettyprint prettyprinted">{
+        "user_name": "xxx",  //用户名
+        "password": "xxx",   //密码
+        "check_type": 1      //验收类型，1：路由器，2：矿机
+        "data":[
+            {
+                "mac":"xxx",                    //mac地址
+                "host_mac":"xxx",               //母机mac地址
+                "extranet_ip":"xxx",            //外网IP
+                "province":"xxx",               //省份
+                "isp":"xxx",                    //运营商
+                "architecture":"xxx",           //架构
+                "link_bandwidth":zzz,           //链路带宽(Mb)
+                "uplink_speed_bandwidth":zzz,   //上行测速带宽(Mb)
+                "device_type":"xxx",            //设备类型
+                "nat_type":"xxx",               //NAT类型
+                "cpu_num":zzz,                  //CPU核数
+                "mem_size":zzz,                 //内存大小(Gb)
+                "storageType":"xxx",            //存储类型
+                "storage_size":zzz,             //存储容量(Gb)
+                "agent_version":"xxx"           //验收Agent版本
+            }
+        ]  
+    }</pre>
+    <p style="font-size:14px">(3) 响应</p>
+    <pre class="prettyprint prettyprinted">{
+        "ret_code":0,        //0:成功  _1:失败
+        "ret_msg":"xxx",     //ret_code为0时，不返回；ret_code为-1时，返回错误信息
+        "taks_id":zzz,       //ret_code为0时，返回任务id；ret_code为-1时，不返回
+        "total_submit":zzz,  //ret_code为0时，返回提交总数；ret_code为-1时，不返回
+        "succ_submit":zzz,   //ret_code为0时，返回提交成功总数；ret_code为-1时，不返回
+        "fail_submit_mac":[] //ret_code为0时，返回提交失败的mac，包括与系统重复、提交重复、非法的mac；ret_code为-1时，不返回
+}</pre>
+
+    <h4 style="font-size:14px">3. 取消验收接口</h4>
+    <p style="font-size:14px">(1) 请求地址</p>
+    <pre class="prettyprint prettyprinted">DELETE http://*/auto_device_check/v1/check_tasks/{任务id号}?user_name={用户名}&password={密码}</pre>
+    <p style="font-size:14px">备注：Content-Type:text/plain或者application/x-www-form-urlencoded</p>
+    <p style="font-size:14px">(2) 响应</p>
+    <pre class="prettyprint prettyprinted">{
+        "ret_code":0,      //0:成功  -1:失败
+        "ret_msg":"xxx"   //ret_code为0时，不返回；ret_code为-1时，返回错误信息
+}</pre>
+
+    <h4 style="font-size:14px">4. 查询验收接口</h4>
+    <p style="font-size:14px">(1) 请求地址</p>
+    <pre class="prettyprint prettyprinted">GET http://demo/auto_device_check/v1/check_tasks/{任务id号}?user_name={用户名}&password={密码}</pre>
+    <p style="font-size:14px">备注：Content-Type:text/plain或者application/x-www-form-urlencoded</p>
+    <p style="font-size:14px">(2) 响应</p>
+    <pre class="prettyprint prettyprinted">{
+        "ret_code":0      //0:成功  -1:失败
+        "task_status":1   //1:待验收  2:验收失败  3:验收成功 4:已取消验收
+        "ret_msg":"xxx"   //ret_code为0时，不返回；ret_code为-1时，返回错误信息
+        "data":[          //ret_code为0且task_status为3时，返回验收结果；否则返回空列表
+            {
+                "mac":"xxx",
+                "result":"通过",       //"不通过"或者"通过"
+                "msg":"xxx",           //验收通过显示"正常"，不通过显示不通过的原因
+                "isp":"xxx",           //运营商
+                "province":"xxx",      //省份
+                "cpu_num":zzz,         //cpu核数
+                "mem_avail":zzz,       //可用内存(MB)
+                "disk_avail":zzz,      //可用磁盘(MB)
+                "read_iops":zzz,       //读IOPS
+                "cal_bandwidth":zzz,   //评估建议带宽(Mbps)
+                "link_bandwidth":zzz   //链路带宽(Mb)
+            }
+        ]      
+}</pre>
+</p>
+
+<h4>验收信息表格</h4>
+<hr>
+<p style="font-size:14px">
+厂商批量提供设备供部署使用时，平台需要进行设备管理，所以需要提供每台设备的详细信息，供平台入库管理。</br>
+验收文件模版下载: 《<a href="/static/设备验收信息表格.xlsx">设备验收信息表格</a>》 </br>
+验收文件命名规则：<span style="color:red">厂商名称_yymmdd</span></br>
+</p>
+
+<p style="font-size:14px">
+    <table class="table table-bordered table-hover" border=1 cellspacing="0">
+      <thead>
+        <tr class="center">
+          <th width="150px" style="font-size:14px">指标名称</th>
+          <th width="500px" style="font-size:14px">备注</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="center" style="font-size:14px">MAC地址</td>
+          <td style="font-size:14px">运行程序的实例mac，不同设备或者不同docker实例要保证唯一性</td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">母机MAC地址</td>
+          <td style="font-size:14px">非必填，运行docker实例的母机MAC地址</td>
+        </tr>
+        <tr>
+            <td class="center" style="font-size:14px">外网IP</td>
+            <td style="font-size:14px">非必填，设备外网IP，静态设备可以填写</td>
+        </tr>
+        <tr>
+            <td class="center" style="font-size:14px">设备类型</td>
+          <td style="font-size:14px">盒子填写1；直连矿机填写2；P2P矿机填写3</td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">省份</td>
+          <td style="font-size:14px"></td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">城市</td>
+          <td style="font-size:14px">非必填</td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">运营商</td>
+          <td style="font-size:14px">移动、联通、电信和其他</td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">下行带宽(Mbps)</td>
+          <td style="font-size:14px"></td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">上行带宽(Mbps)</td>
+          <td style="font-size:14px"></td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">网络类型</td>
+          <td style="font-size:14px">静态IP、全锥型、端口限制、IP限制、对称型</td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">CPU架构</td>
+          <td style="font-size:14px">arm32/arm64/x86/x86_64</td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">CPU核数</td>
+          <td style="font-size:14px">设备CPU的cores数量，如E3-1230V2@3.30GHz为4 cores 8Threads的cores为4</td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">内存大小MB</td>
+          <td style="font-size:14px"></td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">磁盘类型</td>
+          <td style="font-size:14px">ssd/hdd, 多盘时需要填写不同类型的所有磁盘信息</td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">磁盘数量</td>
+          <td style="font-size:14px">多盘时需要填写不同类型的所有磁盘信息</td>
+        </tr>
+        <tr>
+          <td class="center" style="font-size:14px">磁盘空间(MB)</td>
+          <td style="font-size:14px">多盘时需要填写不同类型的所有磁盘信息</td>
+        </tr>
+      </tbody>
+    </table>
+</p>
+<p style="font-size:14px">
+备注：</br>
+设备磁盘有特殊情况下如多盘，请填写设备下不同磁盘的相关信息
+</p>
+
+</div>
